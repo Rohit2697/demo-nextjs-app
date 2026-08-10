@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DarkModeToggle from "../theme/DarkModeToggle";
 
 export default function Settings() {
   return (
@@ -16,14 +17,10 @@ export default function Settings() {
         </label>
       </section>
 
-      {/*
-        TICKET: "Add a dark mode toggle in settings"
-        No theme system exists yet in this app. A ticket asking for a dark
-        mode toggle should result in something like:
-          - a theme context/provider
-          - a toggle control added to this section
-          - the app respecting the chosen theme
-      */}
+      <section style={{ marginTop: "1.5rem" }}>
+        <h2>Appearance</h2>
+        <DarkModeToggle />
+      </section>
     </main>
   );
 }
