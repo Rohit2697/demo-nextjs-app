@@ -1,18 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Home() {
-  const [formData, setFormData] = useState({
-    email: "",
-    name: "",
-    age: ""
-  });
+  const [formData, setFormData] = useState({ email: '', name: '', age: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,7 +17,7 @@ export default function Home() {
     <main>
       <h1>SDLC Agent Demo</h1>
       <p>This is a deliberately tiny app used to demo the agent pipeline.</p>
-      <form onSubmit={handleSubmit} style={{ marginTop: "1.5rem" }}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email:</label>
           <input
