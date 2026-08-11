@@ -18,14 +18,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme((current) => (current === 'light' ? 'dark' : 'light'));
   };
 
-  const wrapperStyle =
-    theme === 'dark'
-      ? { backgroundColor: '#111111', color: '#f5f5f5', minHeight: '100vh' }
-      : { backgroundColor: '#ffffff', color: '#111111', minHeight: '100vh' };
-
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div style={wrapperStyle}>{children}</div>
+      {children}
     </ThemeContext.Provider>
   );
 }
