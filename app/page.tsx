@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
-  const [formData, setFormData] = useState({ email: '', name: '', age: '' });
+  const [formData, setFormData] = useState({ email: "", name: "", age: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,42 +20,48 @@ export default function Home() {
     <main>
       <h1>SDLC Agent Demo</h1>
       <p>This is a deliberately tiny app used to demo the agent pipeline.</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
         <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </label>
         </div>
         <div>
-          <label htmlFor="age">Age:</label>
-          <input
-            type="number"
-            id="age"
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-            required
-          />
+          <label>
+            Age:
+            <input
+              type="number"
+              name="age"
+              value={formData.age}
+              onChange={handleChange}
+              required
+            />
+          </label>
         </div>
         <button type="submit">Submit</button>
       </form>
+      <p>
+        <Link href="/settings">Go to Settings →</Link>
+      </p>
     </main>
   );
 }
