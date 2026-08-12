@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import UserTable from "./components/UserTable";
 
 export default function Home() {
   const [formData, setFormData] = useState({ email: "", name: "", age: "" });
@@ -60,6 +61,7 @@ export default function Home() {
         </div>
         <button type="submit">Submit</button>
       </form>
+      <UserTable />
       <p>
         <Link href="/settings">Go to Settings →</Link>
       </p>
