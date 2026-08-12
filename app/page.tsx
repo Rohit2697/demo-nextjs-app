@@ -18,6 +18,7 @@ export default function Home() {
 
   return (
     <main>
+      <h1 style={{ backgroundColor: "yellow" }}>Welcome to SDLC</h1>
       <h1>SDLC Agent Demo</h1>
       <p>This is a deliberately tiny app used to demo the agent pipeline.</p>
       <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
