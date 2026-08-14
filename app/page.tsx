@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import UserTable from "./components/UserTable";
+import Stopwatch from "./components/Stopwatch";
 
 export default function Home() {
   const [formData, setFormData] = useState({ email: "", name: "", age: "" });
@@ -62,6 +63,7 @@ export default function Home() {
         <button type="submit">Submit</button>
       </form>
       <UserTable />
+      <Stopwatch />
       <p>
         <Link href="/settings">Go to Settings →</Link>
       </p>
