@@ -24,11 +24,27 @@ const Stopwatch: React.FC = () => {
   };
 
   return (
-    <div style={{ margin: '1rem 0', padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-      <h2>Stopwatch</h2>
-      <p>{new Date(time * 1000).toISOString().substr(11, 8)}</p>
-      <button onClick={handleStartStop}>{isRunning ? 'Stop' : 'Start'}</button>
-      <button onClick={handleReset} disabled={time === 0}>Reset</button>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '150px',
+      height: '150px',
+      borderRadius: '50%',
+      background: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
+      color: '#fff',
+      fontSize: '1.5rem',
+      textAlign: 'center',
+      margin: '1rem auto'
+    }}>
+      <div>{new Date(time * 1000).toISOString().substr(11, 8)}</div>
+      <button onClick={handleStartStop} style={{ marginTop: '0.5rem' }}>
+        {isRunning ? 'Stop' : 'Start'}
+      </button>
+      <button onClick={handleReset} style={{ marginTop: '0.5rem' }}>
+        Reset
+      </button>
     </div>
   );
 };
