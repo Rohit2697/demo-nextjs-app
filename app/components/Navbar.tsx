@@ -3,10 +3,16 @@ import Image from 'next/image';
 
 const Navbar: React.FC = () => {
   return (
-    <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'blue', padding: '1rem', color: 'white' }}>
+    <nav style={{ backgroundColor: 'blue', padding: '1rem', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div>SDLC Pipeline</div>
-      <div style={{ width: '40px', height: '40px', borderRadius: '50%', overflow: 'hidden' }}>
-        <Image src="/avatar-placeholder.png" alt="Profile Avatar" width={40} height={40} />
+      <div>
+        <Image
+          src="/avatar-placeholder.svg"
+          alt="Profile Avatar"
+          width={40}
+          height={40}
+          style={{ borderRadius: '50%' }}
+        />
       </div>
     </nav>
   );
