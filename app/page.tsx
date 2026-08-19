@@ -1,12 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import UserTable from "./components/UserTable";
 import Stopwatch from "./components/Stopwatch";
+import Loader from "./components/Loader";
 
 export default function Home() {
   const [formData, setFormData] = useState({ email: "", name: "", age: "" });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,6 +26,10 @@ export default function Home() {
     e.preventDefault();
     console.log(formData);
   };
+
+  if (isLoading) {
+    return <Loader label="Loading SDLC Agent Demo..." />;
+  }
 
   return (
     <main>
