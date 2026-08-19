@@ -1,9 +1,9 @@
-import { ThemeProvider } from "./theme/ThemeContext";
-import Navbar from "./components/Navbar";
+import { ThemeProvider } from './theme/ThemeContext';
+import Navbar from './components/Navbar';
 
 export const metadata = {
-  title: "SDLC Agent Demo",
-  description: "Minimal app used to demo the SDLC agent POC",
+  title: 'SDLC Agent Demo',
+  description: 'Minimal app used to demo the SDLC agent POC',
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ fontFamily: "system-ui, sans-serif", margin: 0, padding: "2rem" }}>
+      <body style={{ fontFamily: 'system-ui, sans-serif', margin: 0, padding: '2rem' }}>
         <Navbar />
         <ThemeProvider>{children}</ThemeProvider>
       </body>

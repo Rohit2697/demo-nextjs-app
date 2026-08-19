@@ -1,31 +1,50 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark' | 'system';
 
 interface ThemeContextValue {
   theme: Theme;
-  toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme') as Theme;
+      return storedTheme || 'system';
+    }
+    return 'system';
+  });
 
-  const toggleTheme = () => {
-    setTheme((current) => (current === 'light' ? 'dark' : 'light'));
-  };
+  useEffect(() => {
+    if (theme === 'system') {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleSystemThemeChange = () => {
+        document.documentElement.setAttribute(
+          'data-theme',
+          mediaQuery.matches ? 'dark' : 'light'
+        );
+      };
 
-  const wrapperStyle =
-    theme === 'dark'
-      ? { backgroundColor: '#111111', color: '#f5f5f5', minHeight: '100vh' }
-      : { backgroundColor: '#ffffff', color: '#111111', minHeight: '100vh' };
+      handleSystemThemeChange();
+      mediaQuery.addEventListener('change', handleSystemThemeChange);
+      return () => {
+        mediaQuery.removeEventListener('change', handleSystemThemeChange);
+      };
+    } else {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div style={wrapperStyle}>{children}</div>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <div>{children}</div>
     </ThemeContext.Provider>
   );
 }
