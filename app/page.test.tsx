@@ -37,4 +37,15 @@ describe("Home page loader", () => {
     expect(screen.queryByRole("status")).not.toBeInTheDocument();
     expect(screen.getByText("SDLC Agent Demo")).toBeInTheDocument();
   });
+
+  it("renders the demo progress bar after loading", () => {
+    render(<Home />);
+
+    act(() => {
+      jest.advanceTimersByTime(600);
+    });
+
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    expect(screen.getByText("Demo progress")).toBeInTheDocument();
+  });
 });
