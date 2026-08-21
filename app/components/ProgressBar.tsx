@@ -1,10 +1,12 @@
 import React from "react";
 
+type NamedColor = "blue" | "green" | "orange";
+
 interface ProgressBarProps {
   progress: number;
   label?: string;
   height?: number;
-  color?: string;
+  color?: NamedColor | string;
 }
 
 const clamp = (value: number, min: number, max: number): number => {
@@ -12,13 +14,27 @@ const clamp = (value: number, min: number, max: number): number => {
   return Math.min(max, Math.max(min, value));
 };
 
+const NAMED_COLORS: Record<NamedColor, string> = {
+  blue: "#3b82f6",
+  green: "#22c55e",
+  orange: "#f97316",
+};
+
+const resolveColor = (color: NamedColor | string): string => {
+  if (color in NAMED_COLORS) {
+    return NAMED_COLORS[color as NamedColor];
+  }
+  return color;
+};
+
 const ProgressBar: React.FC<ProgressBarProps> = ({
   progress,
   label,
   height = 12,
-  color = "#3b82f6",
+  color = "blue",
 }) => {
   const clampedProgress = clamp(progress, 0, 100);
+  const resolvedColor = resolveColor(color);
 
   return (
     <div style={{ width: "100%" }}>
@@ -41,10 +57,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         }}
       >
         <div
+          data-testid="progress-bar-fill"
           style={{
             width: `${clampedProgress}%`,
             height: "100%",
-            backgroundColor: color,
+            backgroundColor: resolvedColor,
             borderRadius: height / 2,
             transition: "width 0.3s ease",
           }}

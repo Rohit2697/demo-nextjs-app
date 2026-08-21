@@ -45,7 +45,19 @@ describe("Home page loader", () => {
       jest.advanceTimersByTime(600);
     });
 
-    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    expect(screen.getAllByRole("progressbar").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("Demo progress")).toBeInTheDocument();
+  });
+
+  it("renders the orange demo progress bar after loading", () => {
+    render(<Home />);
+
+    act(() => {
+      jest.advanceTimersByTime(600);
+    });
+
+    expect(screen.getByText("Demo progress (orange)")).toBeInTheDocument();
+    const bars = screen.getAllByRole("progressbar");
+    expect(bars.length).toBe(2);
   });
 });
