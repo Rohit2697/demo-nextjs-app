@@ -34,4 +34,25 @@ describe("ProgressBar", () => {
     render(<ProgressBar progress={30} />);
     expect(screen.queryByText("Uploading...")).not.toBeInTheDocument();
   });
+
+  it("defaults to the blue color when no color is provided", () => {
+    render(<ProgressBar progress={50} />);
+    const fill = screen.getByTestId("progress-bar-fill");
+    expect(fill).toHaveStyle({ backgroundColor: "#3b82f6" });
+  });
+
+  it("renders an orange progress bar when color is set to orange", () => {
+    render(<ProgressBar progress={65} color="orange" label="Orange progress" />);
+    const bar = screen.getByRole("progressbar");
+    expect(bar).toHaveAttribute("aria-valuenow", "65");
+    const fill = screen.getByTestId("progress-bar-fill");
+    expect(fill).toHaveStyle({ backgroundColor: "#f97316" });
+    expect(screen.getByText("Orange progress")).toBeInTheDocument();
+  });
+
+  it("supports a custom hex color string as a fallback", () => {
+    render(<ProgressBar progress={20} color="#123456" />);
+    const fill = screen.getByTestId("progress-bar-fill");
+    expect(fill).toHaveStyle({ backgroundColor: "#123456" });
+  });
 });
