@@ -5,16 +5,25 @@ import Link from "next/link";
 import UserTable from "./components/UserTable";
 import Stopwatch from "./components/Stopwatch";
 import Loader from "./components/Loader";
+import ProgressBar from "./components/ProgressBar";
 
 export default function Home() {
   const [formData, setFormData] = useState({ email: "", name: "", age: "" });
   const [isLoading, setIsLoading] = useState(true);
+  const [demoProgress, setDemoProgress] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 600);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDemoProgress((current) => (current >= 100 ? 0 : current + 10));
+    }, 500);
+    return () => clearInterval(interval);
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +45,9 @@ export default function Home() {
       <h1 style={{ backgroundColor: "yellow" }}>Welcome to SDLC</h1>
       <h1>SDLC Agent Demo</h1>
       <p>This is a deliberately tiny app used to demo the agent pipeline.</p>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <ProgressBar progress={demoProgress} label="Demo progress" />
+      </div>
       <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
         <div>
           <label>
