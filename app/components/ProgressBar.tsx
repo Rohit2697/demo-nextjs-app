@@ -1,6 +1,6 @@
 import React from "react";
 
-type NamedColor = "blue" | "green" | "orange";
+type NamedColor = "blue" | "green" | "orange" | "pink";
 
 interface ProgressBarProps {
   progress: number;
@@ -18,6 +18,7 @@ const NAMED_COLORS: Record<NamedColor, string> = {
   blue: "#3b82f6",
   green: "#22c55e",
   orange: "#f97316",
+  pink: "#ec4899",
 };
 
 const resolveColor = (color: NamedColor | string): string => {

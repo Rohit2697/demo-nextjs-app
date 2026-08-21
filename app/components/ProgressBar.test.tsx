@@ -50,6 +50,15 @@ describe("ProgressBar", () => {
     expect(screen.getByText("Orange progress")).toBeInTheDocument();
   });
 
+  it("renders a pink progress bar when color is set to pink", () => {
+    render(<ProgressBar progress={50} color="pink" label="Pink progress" />);
+    const bar = screen.getByRole("progressbar");
+    expect(bar).toHaveAttribute("aria-valuenow", "50");
+    const fill = screen.getByTestId("progress-bar-fill");
+    expect(fill).toHaveStyle({ backgroundColor: "#ec4899" });
+    expect(screen.getByText("Pink progress")).toBeInTheDocument();
+  });
+
   it("supports a custom hex color string as a fallback", () => {
     render(<ProgressBar progress={20} color="#123456" />);
     const fill = screen.getByTestId("progress-bar-fill");
