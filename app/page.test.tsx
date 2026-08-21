@@ -58,6 +58,24 @@ describe("Home page loader", () => {
 
     expect(screen.getByText("Demo progress (orange)")).toBeInTheDocument();
     const bars = screen.getAllByRole("progressbar");
-    expect(bars.length).toBe(2);
+    expect(bars.length).toBe(3);
+  });
+
+  it("renders the pink demo progress bar after loading", () => {
+    render(<Home />);
+
+    act(() => {
+      jest.advanceTimersByTime(600);
+    });
+
+    expect(screen.getByText("Demo progress (pink)")).toBeInTheDocument();
+    const bars = screen.getAllByRole("progressbar");
+    expect(bars.length).toBe(3);
+
+    const fills = screen.getAllByTestId("progress-bar-fill");
+    const pinkFill = fills.find(
+      (el) => (el as HTMLElement).style.backgroundColor === "rgb(236, 72, 153)"
+    );
+    expect(pinkFill).toBeTruthy();
   });
 });

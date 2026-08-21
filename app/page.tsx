@@ -51,6 +51,9 @@ export default function Home() {
       <div style={{ marginBottom: "1.5rem" }}>
         <ProgressBar progress={demoProgress} label="Demo progress (orange)" color="orange" />
       </div>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <ProgressBar progress={demoProgress} label="Demo progress (pink)" color="pink" />
+      </div>
       <form onSubmit={handleSubmit} style={{ marginBottom: "1rem" }}>
         <div>
           <label>
